@@ -57,11 +57,5 @@ export default {
       this.fetchAddresses();
     }
   },
-
-  created() {
-    // this.addresses.forEach( a => {
-    // 	a.imgSrc = require(a.imgSrc);
-    // });
-  },
 };
 </script>

@@ -233,8 +233,7 @@ export default {
         const { data } = response;
 
         console.log({ data });
-        data.address =
-          `${data.coffeeStore.address.planningStructure}. ${data.coffeeStore.address.street}`.toLowerCase();
+        data.address = `${data.coffeeStore.address.planningStructure}. ${data.coffeeStore.address.street}`.toLowerCase();
         data.orderTime = timeArrToLocaleTime(data.orderTime);
         this.orderItems = data.items;
         this.order = [data];
@@ -297,9 +296,7 @@ export default {
   },
 
   created() {
-    // this.getOrder();
     this.changeStatus();
-    // this.getOrderByStore();
   },
 };
 </script>
