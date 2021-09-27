@@ -102,7 +102,6 @@ export default {
   },
   created() {
     this.getFevoriteCoffees();
-    this.getFevoriteSchedules();
   },
 };
 </script>
