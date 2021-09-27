@@ -11,7 +11,7 @@ const store = new Vuex.Store({
     role: [],
     token: null,
     phone: null,
-
+    addresses: [],
   },
   getters: {
     getName(state){
@@ -23,7 +23,30 @@ const store = new Vuex.Store({
     getToken(state){
       return state.token;
     },
+
+    getAdresses(state){
+      return state.addresses.map((elem) => {
+        const { id } = elem;
+        const { planningStructure, street } = elem.address;
+        return {
+          address: `${planningStructure}. ${street}`.toLowerCase(),
+          id: id,
+        }
+      })
+    },
+    getAdressesWithPhone(state) {
+      return state.addresses.map((elem) => {
+        const { id, phone } = elem;
+        const { planningStructure, street } = elem.address;
+        return {
+          address: `${planningStructure}. ${street}`.toLowerCase(),
+          id: id,
+          phone: phone,
+        }
+      })
+    },
   },
+
   mutations: {
     SET_USER (state, {name, role, phone}) {
       state.name = name;
@@ -33,6 +56,10 @@ const store = new Vuex.Store({
 
     SET_TOKEN (state, payload){
       state.token = payload;
+    },
+
+    SET_ADDRESSES(state, addresses){
+      state.addresses = addresses;
     }
   },
 
@@ -54,7 +81,16 @@ const store = new Vuex.Store({
     logout(context){
       context.commit('SET_USER', {name: null, role: null, phone: null})
       context.commit('SET_TOKEN', null);
-    }
+    },
+    fetchAddresses(context){
+      axios({
+        method: "get",
+        url: "${URL_API}/order/stores",
+      }).then((response) => {
+        const { data } = response;
+        context.commit('SET_ADDRESSES', data);
+      });
+    },
   }
 })
 
