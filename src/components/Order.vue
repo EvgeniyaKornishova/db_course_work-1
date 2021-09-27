@@ -217,7 +217,7 @@ export default {
       });
     },
 
-    getFevoriteCoffees() {
+    getFavoriteCoffees() {
       axios({
         method: "get",
         url: `${URL_API}/customer/favorite_coffees`,
@@ -297,7 +297,7 @@ export default {
   created() {
     this.getCoffee();
     this.getDesserts();
-    this.getFevoriteCoffees();
+    this.getFavoriteCoffees();
   },
 };
 </script>
